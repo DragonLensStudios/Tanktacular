@@ -109,7 +109,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 93b61cfb69889d046a73c9a5e178bf88,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 59ad3daedf942406fbb876a8c94522a0, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 93b61cfb69889d046a73c9a5e178bf88, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: d0cf9f589601a407eb8446fe6e69fffc, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -215,6 +215,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 93b61cfb69889d046a73c9a5e178bf88,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_SpriteState.m_PressedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 93b61cfb69889d046a73c9a5e178bf88,
         type: 3}
