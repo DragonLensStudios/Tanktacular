@@ -10,7 +10,7 @@ GameObject:
   - 224: {fileID: 22418362}
   - 114: {fileID: 11422304}
   m_Layer: 0
-  m_Name: Player UI Charcter
+  m_Name: Player UI Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Manager: {fileID: 0}
   PlayerName: Player 1
+  PlayerNumber: 1
   Cursorsensitivity: 350
+  CharacterPrefab: {fileID: 0}
+  CharacterPanel: {fileID: 0}
 --- !u!114 &11464130
 MonoBehaviour:
   m_ObjectHideFlags: 1

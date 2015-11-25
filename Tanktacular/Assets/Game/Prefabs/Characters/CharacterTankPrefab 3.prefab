@@ -978,6 +978,9 @@ MonoBehaviour:
   Name: Hero Tank
   Portrit: {fileID: 21300000, guid: f178146a44de340829e1c25c4ee4c072, type: 3}
   Unlocked: 0
+  TankMovement: {fileID: 11443146, guid: b98593460e6863c4a969befdb7690b02, type: 2}
+  TankHealth: {fileID: 0}
+  TankShooting: {fileID: 0}
 --- !u!114 &11482748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3457,6 +3460,11 @@ Prefab:
       propertyPath: Unlocked
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TankMovement
+      value: 
+      objectReference: {fileID: 11443146, guid: b98593460e6863c4a969befdb7690b02,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 173472}

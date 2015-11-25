@@ -799,9 +799,6 @@ MonoBehaviour:
   m_StartingHealth: 100
   m_Slider: {fileID: 11482748}
   m_FillImage: {fileID: 11404512}
-  m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
-  m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  m_ExplosionPrefab: {fileID: 151086, guid: 6bc6d0dd8b8428e4ca316513f2cf13c6, type: 2}
   m_HealthColor:
     key0:
       serializedVersion: 2
@@ -845,6 +842,7 @@ MonoBehaviour:
     atime7: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+  m_ExplosionPrefab: {fileID: 151086, guid: 6bc6d0dd8b8428e4ca316513f2cf13c6, type: 2}
 --- !u!114 &11416810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -980,6 +978,9 @@ MonoBehaviour:
   Name: LOL Tank
   Portrit: {fileID: 21300000, guid: f178146a44de340829e1c25c4ee4c072, type: 3}
   Unlocked: 1
+  TankMovement: {fileID: 11443146}
+  TankHealth: {fileID: 11409376}
+  TankShooting: {fileID: 11488788}
 --- !u!114 &11482748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3459,6 +3460,18 @@ Prefab:
       propertyPath: Unlocked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TankMovement
+      value: 
+      objectReference: {fileID: 11443146}
+    - target: {fileID: 0}
+      propertyPath: TankHealth
+      value: 
+      objectReference: {fileID: 11409376}
+    - target: {fileID: 0}
+      propertyPath: TankShooting
+      value: 
+      objectReference: {fileID: 11488788}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 173472}

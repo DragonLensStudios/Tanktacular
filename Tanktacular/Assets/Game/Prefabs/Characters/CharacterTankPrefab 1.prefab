@@ -976,8 +976,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Super Tank
-  Portrit: {fileID: 21300000, guid: c080e12d534f64fc48bffb53d9f55fba, type: 3}
+  Portrit: {fileID: 21300000, guid: 76198afcda160d042b6ca5d63f73a265, type: 3}
   Unlocked: 1
+  TankMovement: {fileID: 11443146}
+  TankHealth: {fileID: 11409376}
+  TankShooting: {fileID: 11488788}
 --- !u!114 &11482748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3451,12 +3454,24 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Portrit
       value: 
-      objectReference: {fileID: 21300000, guid: c080e12d534f64fc48bffb53d9f55fba,
+      objectReference: {fileID: 21300000, guid: 76198afcda160d042b6ca5d63f73a265,
         type: 3}
     - target: {fileID: 0}
       propertyPath: Unlocked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TankMovement
+      value: 
+      objectReference: {fileID: 11443146}
+    - target: {fileID: 0}
+      propertyPath: TankHealth
+      value: 
+      objectReference: {fileID: 11409376}
+    - target: {fileID: 0}
+      propertyPath: TankShooting
+      value: 
+      objectReference: {fileID: 11488788}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 173472}
