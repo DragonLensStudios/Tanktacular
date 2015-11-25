@@ -15,6 +15,7 @@ namespace MultiplayerWithBindingsExampleUI
 	{
 		public GameObject playerPrefab;
 	    public GameObject canvas;
+	    public GameObject playerpanels;
 
 		const int maxPlayers = 4;
 
@@ -176,6 +177,11 @@ namespace MultiplayerWithBindingsExampleUI
 					// We could create a new instance, but might as well reuse the one we have
 					// and it lets us easily find the keyboard player.
 					player.Actions = keyboardListener;
+                    var charpanelscript = playerpanels.transform.GetChild(players.Count).gameObject.GetComponent<CharacterPanelScript>();
+                    player.CharacterPanel = charpanelscript;
+                    player.CharacterPanel.Reset();
+                    charpanelscript.Player = player;
+//                    player.CharacterPanel = playerpanels.transform.GetChild(players.Count).gameObject.GetComponent<CharacterPanelScript>();
 				}
 				else
 				{
@@ -186,9 +192,14 @@ namespace MultiplayerWithBindingsExampleUI
 
 					player.Actions = actions;
 				    player.Inputdevice = inputDevice;
+				    player.PlayerNumber = players.Count + 1;
+                    var charpanelscript = playerpanels.transform.GetChild(players.Count).gameObject.GetComponent<CharacterPanelScript>();
+				    player.CharacterPanel = charpanelscript;
+                    player.CharacterPanel.Reset();
+				    charpanelscript.Player = player;
 				}
 
-				players.Add( player );
+                players.Add( player );
                 return player;
 			}
 
@@ -199,7 +210,7 @@ namespace MultiplayerWithBindingsExampleUI
 		void RemovePlayer( Player player )
 		{
 			players.Remove( player );
-			player.Actions = null;
+			player.Reset();
 			Destroy( player.gameObject );
 		}
 

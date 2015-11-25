@@ -19,7 +19,10 @@ namespace MultiplayerWithBindingsExampleUI
 	    public InputDevice Inputdevice;
 		public PlayerActions Actions { get; set; }
 	    public string PlayerName = "Player 1";
+	    public int PlayerNumber = 1;
 	    public float Cursorsensitivity;
+	    public GameObject CharacterPrefab;
+	    public CharacterPanelScript CharacterPanel;
 
 	    void Awake()
 	    {
@@ -36,10 +39,7 @@ namespace MultiplayerWithBindingsExampleUI
 
         void OnEnable()
         {
-
-            PlayerName = "Player " + (Manager.players.Count + 1);
-            gameObject.name = PlayerName;
-            GetComponentInChildren<Text>().text = (Manager.players.Count + 1).ToString();
+            GetComponentInChildren<Text>().text = (PlayerNumber).ToString();
         }
 
 
@@ -51,7 +51,9 @@ namespace MultiplayerWithBindingsExampleUI
 
 		void Update()
 		{
-			if (Actions == null)
+            PlayerName = "Player " + (PlayerNumber);
+            gameObject.name = PlayerName;
+            if (Actions == null)
 			{
 				// If no controller exists for this cube, just make it translucent.
 			}
@@ -80,11 +82,26 @@ namespace MultiplayerWithBindingsExampleUI
 //		        GetItemsClicked();
 		        foreach (RaycastResult item in GetItemsClicked())
 		        {
-		            if (item.gameObject.GetComponent<Button>())
+		            if (item.gameObject.GetComponent<CharacterButtonScript>())
 		            {
-		                var button = item.gameObject.GetComponent<Button>();
-		                Debug.Log(item.gameObject.name);
-		                button.onClick.Invoke();;
+		                var cbs = item.gameObject.GetComponent<CharacterButtonScript>();
+		                var pcs = cbs.m_CharacterScript;
+		                if (pcs.Unlocked)
+		                {
+                            CharacterPrefab = cbs.m_CharacterPrefab;
+                            Debug.Log(name + " Selected " + pcs.Name);
+                            Debug.Log("Start Health: " + pcs.TankHealth.m_StartingHealth);
+                            Debug.Log("Tank Speed: " + pcs.TankMovement.m_Speed);
+                            Debug.Log("Tank Max Launch Force: " + pcs.TankShooting.m_MaxLaunchForce);
+                        }
+		                else
+		                {
+		                    Debug.Log("Character Locked!");
+		                }
+//                        CharacterPrefab = cbs.m_CharacterPrefab;
+//                        Debug.Log(name + " Selected " + pcs.Name);
+//                        Debug.Log(item.gameObject.name);
+//		                button.onClick.Invoke();;
 		            }
                 }
 
@@ -146,6 +163,12 @@ namespace MultiplayerWithBindingsExampleUI
             return Result;
         }
 
+	    public void Reset()
+	    {
+           CharacterPrefab = null;
+           CharacterPanel.Reset();
+	       Actions = null;
+	    }
 
     }
 }

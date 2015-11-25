@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class CharacterButtonScript : MonoBehaviour
 {
     public GameObject m_CharacterPrefab;
-    private PlayableCharacterScript m_CharacterScript;
+    [HideInInspector]public PlayableCharacterScript m_CharacterScript;
     private Text m_CharacterNameText;
     private Image m_CharacterImage;
 
@@ -17,26 +16,22 @@ public class CharacterButtonScript : MonoBehaviour
         
     }
 
-    void OnEnable()
+//    void OnEnable()
+//    {
+//        if (m_CharacterScript.Unlocked)
+//        {
+//            m_CharacterNameText.text = m_CharacterScript.Name;
+//            m_CharacterImage.sprite = m_CharacterScript.Portrit;
+//        }
+//    }
+
+    void Update()
     {
-        if (m_CharacterScript.Unlocked == false)
-        {
-            m_CharacterNameText.text = "???";
-        }
-        else
+        if (m_CharacterScript.Unlocked)
         {
             m_CharacterNameText.text = m_CharacterScript.Name;
             m_CharacterImage.sprite = m_CharacterScript.Portrit;
         }
     }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
