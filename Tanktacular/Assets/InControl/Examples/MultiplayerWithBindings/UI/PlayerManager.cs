@@ -62,39 +62,12 @@ namespace MultiplayerWithBindingsExampleUI
 				}
 			}
 
-//            if (ExitButtonWasPressedOnListener(joystickListener))
-//            {
-//                var inputDevice = InputManager.ActiveDevice;
-//
-//                var player = FindPlayerUsingJoystick(inputDevice);
-//                if (player != null)
-//                {
-//                    RemovePlayer(player);
-//                }
-////                Debug.Log("Select Was Pressed on " + inputDevice.Name);
-//
-//            }
-//
-//            if (ExitButtonWasPressedOnListener(keyboardListener))
-//            {
-//                var player = FindPlayerUsingKeyboard();
-//                if (player != null)
-//                {
-//                    RemovePlayer(player);
-//                }
-//            }
 
 		    Player player = players.Find(x => x.Actions.Select.WasPressed);
 		    if (player != null)
 		    {
                 RemovePlayer(player);
             }
-            //		    if (players.Find(x => x.Actions.Cancel.WasPressed))
-            //		    {
-            //                player = 
-            ////		        var player = players.Find(x => x.Actions.Cancel.WasPressed);
-            //		        Debug.Log(player.name + " Pressed Cancel");
-            //		    }
         }
 
 
@@ -102,11 +75,6 @@ namespace MultiplayerWithBindingsExampleUI
 		{
 			return actions.Accept.WasPressed || actions.Start.WasPressed;
 		}
-
-//        bool ExitButtonWasPressedOnListener(PlayerActions actions)
-//        {
-//            return actions.Select.WasPressed;
-//        }
 
 
         Player FindPlayerUsingJoystick( InputDevice inputDevice )
@@ -225,7 +193,7 @@ namespace MultiplayerWithBindingsExampleUI
 
 			if (players.Count < maxPlayers)
 			{
-				GUI.Label( new Rect( 10, y, 300, y + h ), "Press a button or a/s/d/f key to join!" );
+				GUI.Label( new Rect( 10, y, 300, y + h ), "Press the start button or enter to join!" );
 				y += h;
 			}
 		}

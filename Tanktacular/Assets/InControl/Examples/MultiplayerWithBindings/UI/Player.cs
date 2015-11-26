@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using DLS.Utility;
 using UnityEngine;
 using InControl;
 using UnityEngine.EventSystems;
@@ -39,7 +41,6 @@ namespace MultiplayerWithBindingsExampleUI
 
         void OnEnable()
         {
-            GetComponentInChildren<Text>().text = (PlayerNumber).ToString();
         }
 
 
@@ -53,6 +54,7 @@ namespace MultiplayerWithBindingsExampleUI
 		{
             PlayerName = "Player " + (PlayerNumber);
             gameObject.name = PlayerName;
+            GetComponentInChildren<Text>().text = (PlayerNumber).ToString();
             if (Actions == null)
 			{
 				// If no controller exists for this cube, just make it translucent.
@@ -79,83 +81,108 @@ namespace MultiplayerWithBindingsExampleUI
 
 		    if (Actions.Accept.WasPressed)
 		    {
-//		        GetItemsClicked();
-		        foreach (RaycastResult item in GetItemsClicked())
+		        for (int i = 0; i < GetItemsClicked().Count; i++)
 		        {
-		            if (item.gameObject.GetComponent<CharacterButtonScript>())
+		            var go = GetItemsClicked()[i].gameObject;
+		            if (go.GetComponent<CharacterButtonScript>() != null)
 		            {
-		                var cbs = item.gameObject.GetComponent<CharacterButtonScript>();
-		                var pcs = cbs.m_CharacterScript;
-		                if (pcs.Unlocked)
-		                {
+                        var cbs = go.GetComponent<CharacterButtonScript>();
+                        var pcs = cbs.m_CharacterScript;
+                        if (pcs.Unlocked)
+                        {
                             CharacterPrefab = cbs.m_CharacterPrefab;
                             Debug.Log(name + " Selected " + pcs.Name);
                             Debug.Log("Start Health: " + pcs.TankHealth.m_StartingHealth);
                             Debug.Log("Tank Speed: " + pcs.TankMovement.m_Speed);
                             Debug.Log("Tank Max Launch Force: " + pcs.TankShooting.m_MaxLaunchForce);
                         }
-		                else
-		                {
-		                    Debug.Log("Character Locked!");
-		                }
-//                        CharacterPrefab = cbs.m_CharacterPrefab;
-//                        Debug.Log(name + " Selected " + pcs.Name);
-//                        Debug.Log(item.gameObject.name);
-//		                button.onClick.Invoke();;
-		            }
-                }
-
-//                Ray ray = Camera.main.ScreenPointToRay(transform.position);
-//                Debug.Log("current pos: " + transform.position);
-//                RaycastHit2D hit;
-//                if (Physics2D.Raycast(new Vector2(transform.position.x,transform.position.y),Vector2.zero))
-//                {
-////                    Quaternion q = Quaternion.FromToRotation(-transform.forward, hit.normal);
-////                    Instantiate(inventoryControl.activeBomb, hit.point + hit.normal * 0.01f, q);
-//                }
-
-
-		        //                                var pointer = new PointerEventData(EventSystem.current);
-		        //                                // convert to a 2D position
-		        //                                pointer.position = Camera.main.WorldToScreenPoint(transform.position);
-		        //                                var raycastResults = new List<RaycastResult>();
-		        //                                EventSystem.current.RaycastAll(pointer, raycastResults);
-		        //                                Debug.Log(raycastResults.Count);
-		        //                                if (raycastResults.Count > 0)
-		        //                                {
-		        //                                    Debug.Log(raycastResults[0].gameObject.name);
-		        //                                    // Do anything to the hit objects. Here, I simply disable the first one.
-		        //                //                    raycastResults[0].gameObject.SetActive(false);
-		        //                                }
-
-		        //                GraphicRaycaster graphicraycaster = GetComponent<GraphicRaycaster>();
-		        //                PointerEventData ped = new PointerEventData(EventSystem.current);
-		        //		        ped.position = Camera.main.WorldToScreenPoint(transform.position);
-		        //                List<RaycastResult> results = new List<RaycastResult>();
-		        //                graphicraycaster.Raycast(ped,results);
-		        //                Debug.Log(results[0].gameObject.name);
-
-		        //                graphicraycaster.Raycast();
-		        //                //		        Debug.Log();
-		        //                var ray = Camera.main.ScreenPointToRay(transform.position);
-		        //		        RaycastHit hit;
-		        //		        if (Physics.Raycast(ray, out hit, 100))
-		        //		        {
-		        //		            ray.
-		        //		        }
+                        else
+                        {
+                            Debug.Log("Character Locked!");
+                        }
+                    }
+		        }
 		    }
 
             if (Actions.Cancel.WasPressed)
-		    {
-//		        Debug.Log ((PlayerName == "Player 1") ? "YOU ARE THE MASTER PLAYER" : "YOU ARE Player 2");
-		        Debug.Log("Cancel Was Pressed!");
-		    }
+            {
+                var item2 = UIRaycast.CastAll(transform.position, true, gameObject);
+//                var item = UIRaycast.GetFirstGameobject(new Vector3(300, 300));
+//                Debug.Log(item.name);
+                for (int i = 0; i < item2.Count; i++)
+                {
+                    if (item2[i].gameObject != null)
+                    {
+                        Debug.Log(item2[i].gameObject.name);
+                    }
+
+                }
+                //                if (UIRaycast.GetFirstGameobject(gameObject))
+                //                {
+                //                    var item = UIRaycast.GetFirstGameobject(gameObject);
+                //                    Debug.Log(item.name);
+                //                }
+                //                if (UIRaycast.GetListGameobjects(gameObject) != null)
+                //                {
+                //                    var items = UIRaycast.GetListGameobjects(gameObject);
+                //                    for (int i = 0; i < items.Count; i++)
+                //                    {
+                //                        Debug.Log("Object found: " + items[i].name);
+                //                    }
+                //                }
+
+                //                if(UIRaycast.GetFirstComponent(typeof(Image),gameObject))
+                //                {
+                //                    var item = UIRaycast.GetFirstComponent(typeof (Image), gameObject);
+                //                    Debug.Log("Cast Found: " + item.gameObject.name);
+                //                }
+
+
+                //                if (UIRaycast.GetListComponents(gameObject,typeof(Image),typeof(Text)) != null)
+                //                {
+                //                    var items = UIRaycast.GetListComponents(gameObject, typeof(Image), typeof(Text));
+                //                    for (int i = 0; i < items.Count; i++)
+                //                    {
+                //                        Debug.Log("Item " + i + ": " + items[i].gameObject.name + " Component Type: " + items[i].GetType());
+                //                    }
+                //                }
+
+
+                //                if (GetFirstComponent(typeof(CharacterButtonScript)))
+                //                {
+                //                    var clicked = (CharacterButtonScript)GetFirstComponent(typeof (CharacterButtonScript));
+                //                    var pcs = clicked.m_CharacterPrefab.GetComponent<PlayableCharacterScript>();
+                //                    Debug.Log("Unlocked? "  + pcs.Unlocked);
+                //                }
+
+                //                var cps = GetFirstComponent(typeof(CharacterButtonScript));
+
+                //                var cpsl = GetListComponents(typeof (Button));
+                //
+                //                if (cpsl != null)
+                //                {
+                //                    for (int i = 0; i < cpsl.Count; i++)
+                //                    {
+                //                        Debug.Log("Cpsl Object Name: " + cpsl[i].gameObject.name);
+                //                    }
+                //                }
+
+                //                if (cps != null)
+                //                {
+                ////                    Debug.Log("Returned Value: " + cps.name);
+                //                }
+
+                //                Debug.Log("Cancel Was Pressed!");
+            }
 		}
 
-        private List<RaycastResult> GetItemsClicked()
+        /// <summary>
+        /// Add to Utility class later
+        /// </summary>
+        /// <returns></returns>
+        public List<RaycastResult> GetItemsClicked()
         {
             PointerEventData pointerData = new PointerEventData(EventSystem.current);
-            pointerData.Reset();
             pointerData.position = transform.position;
             List<RaycastResult> Result = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerData, Result);
@@ -163,7 +190,72 @@ namespace MultiplayerWithBindingsExampleUI
             return Result;
         }
 
-	    public void Reset()
+        /// <summary>
+        /// Add to Utility Class later
+        /// </summary>
+        /// <param name="_objectTransform"></param>
+        /// <returns></returns>
+        public List<RaycastResult> GetItemsClicked(Transform _objectTransform)
+        {
+            PointerEventData pointerData = new PointerEventData(EventSystem.current);
+            pointerData.position = _objectTransform.position;
+            List<RaycastResult> Result = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, Result);
+            return Result;
+        }
+
+	    public Component GetFirstItemClicked(Type _type)
+	    {
+            PointerEventData pointerData = new PointerEventData(EventSystem.current);
+            pointerData.position = transform.position;
+            List<RaycastResult> Result = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, Result);
+
+	        if (Result.Any(x => x.gameObject.GetComponent(_type)))
+	        {
+	            var compres = Result.FindAll(x => x.gameObject.GetComponent(_type));
+
+	            for (int i = 0; i < compres.Count; i++)
+	            {
+	                if (compres[i].gameObject.transform.parent.gameObject == gameObject)
+	                {
+	                    continue;
+	                }
+
+                    return compres[i].gameObject.GetComponent(_type);
+	            }
+            }
+
+            return null;
+        }
+
+        public List<Component> GetAllItemsClicked(Type _type)
+        {
+            List<Component> CompList = new List<Component>();
+            PointerEventData pointerData = new PointerEventData(EventSystem.current);
+            pointerData.position = transform.position;
+            List<RaycastResult> Result = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, Result);
+
+            if (Result.Any(x => x.gameObject.GetComponent(_type)))
+            {
+                var compres = Result.FindAll(x => x.gameObject.GetComponent(_type));
+
+                for (int i = 0; i < compres.Count; i++)
+                {
+                    if (compres[i].gameObject.transform.parent.gameObject == gameObject)
+                    {
+                        continue;
+                    }
+                    CompList.Add(compres[i].gameObject.GetComponent(_type));
+                }
+                return CompList;
+            }
+
+            return null;
+        }
+
+        public void Reset()
 	    {
            CharacterPrefab = null;
            CharacterPanel.Reset();

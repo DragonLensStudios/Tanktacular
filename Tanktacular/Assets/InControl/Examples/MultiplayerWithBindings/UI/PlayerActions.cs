@@ -1,5 +1,4 @@
-﻿using System;
-using InControl;
+﻿using InControl;
 
 
 namespace MultiplayerWithBindingsExampleUI
@@ -15,7 +14,7 @@ namespace MultiplayerWithBindingsExampleUI
         public PlayerAction Left;
         public PlayerAction Right;
 
-        public PlayerTwoAxisAction Move;
+//        public PlayerTwoAxisAction Move;
 
 
 		public PlayerActions()
@@ -28,7 +27,7 @@ namespace MultiplayerWithBindingsExampleUI
             Down = CreatePlayerAction("Down");
             Left = CreatePlayerAction("Left");
             Right = CreatePlayerAction("Right");
-        }
+		}
 
 
 		public static PlayerActions CreateWithKeyboardBindings()

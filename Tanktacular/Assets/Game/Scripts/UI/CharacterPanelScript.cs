@@ -57,6 +57,6 @@ public class CharacterPanelScript : MonoBehaviour
         SelectedCharacterName.text = DefaultName;
         SelectedCharacterImage.sprite = DefaultSprite;
         Player = null;
-        PlayerJoined = false;
+        //        PlayerJoined = false;
     }
 }
